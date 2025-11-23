@@ -1,73 +1,183 @@
-# Welcome to your Lovable project
+# Pixel Rebirth Engine — v2.0.0.9
 
-## Project info
+**Pixel Rebirth Engine** is a premium, cinematic canvas-based graphics system that deconstructs any uploaded image and reconstructs it entirely using pixels sourced from a reference image. The effect feels engineered, intentional, and expensive — not a basic canvas trick.
 
-**URL**: https://lovable.dev/projects/003299e5-39e6-41b8-a86a-20af07bacd9d
+This version (**v2.0.0.9**) is the latest stable release.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## ✨ Core Concept
 
-**Use Lovable**
+Users upload any image → the engine breaks it down → then rebuilds it using only the pixel colors extracted from the reference image.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/003299e5-39e6-41b8-a86a-20af07bacd9d) and start prompting.
+Every pixel animates during reconstruction with:
 
-Changes made via Lovable will be committed automatically to this repo.
+* Fade-in
+* Sub-pixel drift (1–2px)
+* Soft blur → sharp clarity
+* 60fps eased settling
+* A final micro-settle motion at completion
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🎬 Cinematic Animation System
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+A sweeping diagonal scanner moves from **top-left → bottom-right**.
 
-Follow these steps:
+Behind the bar:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* Pixels rebirth into their closest color match
+* Animation plays at full 60fps
+* No lag, no freezes, no artifacts
+* Entire effect rendered on `<canvas>` with offscreen buffering
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🧠 Technical Architecture
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Rendering
+
+* Full-screen `<canvas>` core
+* Offscreen canvas for staging
+* Batching system for efficient draws
+* `requestAnimationFrame` for perfectly smooth motion
+
+### Pixel Processing
+
+* Web Worker handles:
+
+  * Color distance matching
+  * Pixel remapping
+  * Palette extraction
+* Main thread stays free for animation
+
+### Animation
+
+* Diagonal sweep timeline
+* Pixel drift + fade-in
+* Crisp settle animation after completion
+
+---
+
+## 🖥️ UI / UX
+
+Minimal, dark, premium UI:
+
+* Centered drag-and-drop uploader
+* Automatic transformation
+* Smooth replay button
+* Soft shadows, no childish colors
+* Desktop-first, responsive to mobile
+
+---
+
+## 📁 Reference Image
+
+Current reference image used by the engine:
+
+**`/mnt/data/cat.png`**
+*(Replace or host externally for production.)*
+
+---
+
+## 🔒 Privacy
+
+Pixel Rebirth Engine values user privacy. All image processing happens **entirely inside your browser** using local JavaScript APIs. No images are uploaded, stored, or sent to any server.
+
+* No external processing
+* No data collection
+* No cloud storage
+
+Your images stay **100% private and on your device** at all times.
+
+---
+
+## 📁 Suggested File Structure
+
+```
+/public
+  reference.png
+
+/src
+  /components
+    UploadZone.jsx
+    CanvasEngine.jsx
+    Controls.jsx
+
+  /workers
+    pixelWorker.js
+
+  /utils
+    colorMatching.js
+    diagonalSweep.js
+    animationBatcher.js
+
+index.html
+style.css
+main.js
+```
+
+---
+
+## 🧩 How It Works
+
+1. User uploads an image
+2. Engine normalizes resolution
+3. Reference palette extracted
+4. Worker maps each pixel → closest reference pixel
+5. Main thread receives buffers
+6. Diagonal sweep animates the reconstruction
+7. Canvas performs finishing micro-settle
+8. User can replay
+
+---
+
+## ⚙️ Performance Notes
+
+* Resize extremely large images for speed
+* Worker uses transferable buffers for max performance
+* Animation batching prevents frame drops
+
+---
+
+## 🧪 Known Issues (v2.0.0.9)
+
+* Mapping huge images (>8 MP) may be slower
+* Some mobile browsers throttle workers
+* Very small reference images may reduce accuracy
+
+---
+
+## 🚧 Future Versions
+
+Upcoming versions will include:
+
+**v 09 stable - pixel swipe between 2 images**
+
+All future releases will remain compatible with older builds — just like Minecraft versioning.
+
+---
+
+## 📦 Install
+
+```
+git clone https://github.com/yourname/pixel-rebirth-engine
+cd pixel-rebirth-engine
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+For vanilla builds, open `index.html`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 👤 Author
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Created by **Shohail**
+Instagram: **@shohailmahmud09**
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## ⭐ Support
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/003299e5-39e6-41b8-a86a-20af07bacd9d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Star the repo and share the demo if you enjoy the project.
